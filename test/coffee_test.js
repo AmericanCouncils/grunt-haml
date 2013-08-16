@@ -64,15 +64,19 @@ exports.coffee = {
     });
 
     // Ruby haml test setups
-    for (var x = 0; x < outputVariations.length; x++) {
-      var variation = outputVariations[x];
-      var ruby_test_name = 'ruby_html/' + variation + '.html';
-      testSetups.push({
-        actual: grunt.file.read('tmp/' + ruby_test_name),
-        expected: grunt.file.read('test/expected/' + ruby_test_name),
-        language: 'ruby',
-        target: 'html'
-      });
+    for (m = 0; m < outputVariations.length; m++) {
+      var outputVariation = outputVariations[m];
+      for (n = 0; n < inputVariations['html'].length; n++) {
+        var inputVariation = inputVariations['html'][n];
+        var ruby_test_name = 'ruby_html' + inputVariation +
+          '/' + outputVariation + '.html';
+        testSetups.push({
+          actual: grunt.file.read('tmp/' + ruby_test_name),
+          expected: grunt.file.read('test/expected/' + ruby_test_name),
+          language: 'ruby',
+          target: 'html'
+        });
+      }
     }
 
     // Run all the tests we prepared
