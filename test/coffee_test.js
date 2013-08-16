@@ -83,7 +83,9 @@ exports.coffee = {
     test.expect(testSetups.length);
     for (i = 0; i < testSetups.length; i++) {
       var testSetup = testSetups[i];
-      test.equal(testSetup.actual, testSetup.expected,
+      test.equal(
+        testSetup.actual.replace(/\s+/g, ' '),
+        testSetup.expected.replace(/\s+/g, ' '),
         'should compile haml on ' + testSetup.language + ' to ' + testSetup.target);
     }
     test.done();
